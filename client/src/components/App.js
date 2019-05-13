@@ -2,7 +2,7 @@ import React, { Component, Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchCurrentUserData } from '../actions';
-import Navbar from './Navbar';
+import Navbar from './Navbar/Navbar';
 import Spinner from './Spinner/Spinner';
 
 const Landing = lazy(() => import('./Landing/Landing'));
