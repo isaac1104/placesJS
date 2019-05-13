@@ -9,6 +9,7 @@ const path = require('path');
 const PORT = process.env.PORT || 5000;
 
 require('./models/User');
+require('./models/SavedPlace');
 require('./services/passport');
 
 mongoose.Promise = global.Promise;
