@@ -11,3 +11,13 @@ export const fetchCurrentUserData = () => async dispatch => {
     dispatch({ type: types.FETCH_CURRENT_USER_FAIL, payload: e });
   }
 };
+
+export const showModal = () => ({
+  type: types.SHOW_MODAL,
+  payload: true
+});
+
+export const hideModal = () => ({
+  type: types.HIDE_MODAL,
+  payload: false
+});

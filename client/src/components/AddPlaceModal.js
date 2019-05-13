@@ -1,22 +1,83 @@
 import React, { Component } from 'react';
-import { Modal, Typography } from 'antd';
-import AddPlaceForm from './AddPlaceForm';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+import { withRouter } from 'react-router-dom';
+import { Modal, Typography, Input, Form } from 'antd';
+import { hideModal } from '../actions';
+
+const { TextArea } = Input;
 
 class AddPlaceModal extends Component {
+  formSubmit = value => {
+    console.log(value);
+    this.props.reset();
+  };
+
+  renderInput({ input }) {
+    return (
+      <Form.Item label='Title'>
+        <Input
+          {...input}
+          autoComplete='off'
+          onFocus={event => event.target.select()}
+        />
+      </Form.Item>
+    );
+  };
+
+  renderTextArea({ input }) {
+    return (
+      <Form.Item label='Description'>
+        <TextArea
+          {...input}
+          rows={4}
+          onFocus={event => event.target.select()}
+        />
+      </Form.Item>
+    );
+  }
+
+  handleModalHide = () => {
+    this.props.reset();
+    this.props.hideModal();
+  }
+
   render() {
+    const { modalVisibility: { visible }, selectedLocation, handleSubmit } = this.props;
     return (
       <Modal
         title='Would you like to save this location?'
-        visible={this.state.modalVisible}
-        onCancel={() => this.setState({ modalVisible: false })}
+        visible={visible}
+        onCancel={this.handleModalHide}
+        onOk={handleSubmit(this.formSubmit)}
       >
         <Typography>
-          {/* {`Latitude & Longitude: ${selectedLocation[0]}, ${selectedLocation[1]}`} */}
+          {`Latitude & Longitude: ${selectedLocation[0]}, ${selectedLocation[1]}`}
         </Typography>
-        <AddPlaceForm />
+        <Form>
+          <Field
+            name='title'
+            component={this.renderInput}
+          />
+          <Field
+            name='description'
+            component={this.renderTextArea}
+          />
+        </Form>
       </Modal>
     );
   }
 }
 
-export default AddPlaceModal;
+const mapStateToProps = ({ modalVisibility }) => {
+  return {
+    modalVisibility
+  };
+};
+
+export default compose(
+  withRouter,
+  reduxForm({ form: 'place', destroyOnUnmount: true }),
+  connect(mapStateToProps, { hideModal })
+)(AddPlaceModal);

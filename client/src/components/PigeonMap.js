@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
+import { showModal } from '../actions';
 import AddPlaceModal from './AddPlaceModal';
 
 class PigeonMap extends Component {
   state = {
     longitude: '',
     latitude: '',
-    selectedLocation: [],
-    modalVisible: false
+    selectedLocation: []
   };
 
   componentDidMount() {
@@ -31,17 +32,20 @@ class PigeonMap extends Component {
         metaWheelZoom
         center={[latitude, longitude]}
         zoom={12}
-        onClick={({ event, latLng, pixel }) => this.setState({ modalVisible: true, selectedLocation: latLng })}
+        onClick={async ({ event, latLng, pixel }) => {
+          await this.setState({ selectedLocation: latLng });
+          this.props.showModal();
+        }}
       >
         <Marker
           anchor={[latitude, longitude]}
           payload={1}
           onClick={({ event, anchor, pixel }) => console.log(anchor)}
         />
-        <AddPlaceModal />
+        <AddPlaceModal selectedLocation={selectedLocation} />
       </Map>
     );
   }
 }
 
-export default PigeonMap;
+export default connect(null, { showModal })(PigeonMap);
