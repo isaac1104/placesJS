@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchCurrentUserData } from '../actions';
 import Navbar from './Navbar/Navbar';
 import Spinner from './Spinner/Spinner';
+import requireAuth from '../utils/requireAuth';
 
 const Landing = lazy(() => import('./Landing/Landing'));
 const Home = lazy(() => import('./Home/Home'));
@@ -31,7 +32,7 @@ class App extends Component {
                 }
               }}
             />
-            <Route exact path='/home' component={Home} />
+            <Route exact path='/home' component={requireAuth(Home)} />
           </Switch>
         </Suspense>
       </BrowserRouter>
