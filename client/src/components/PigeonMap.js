@@ -12,7 +12,10 @@ class PigeonMap extends Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(data => {
         this.setState({ longitude: data.coords.longitude, latitude: data.coords.latitude });
-      });
+      },
+      () => { throw new Error('Could not retrieve current location. Please try again later.') },
+      { timeout: 10000 }
+    );
     } else {
       throw new Error('Please allow geolocation on your browser to get your location.');
     }

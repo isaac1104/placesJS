@@ -18,7 +18,7 @@ app.use(helmet());
 app.use(express.json());
 app.use(cookieSession({
   name: 'session',
-  maxAge: 24 * 60 * 60 * 1000,
+  maxAge: 60 * 60 * 1000,
   keys: [keys.cookieKey]
 }));
 app.use(passport.initialize());
