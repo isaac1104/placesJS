@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Layout, Menu } from 'antd';
+import { connect } from 'react-redux';
 
 const { Header } = Layout;
 
 class Navbar extends Component {
   render() {
+    console.log(this.props.currentUser);
     return (
       <Header>
         <div className='logo' />
@@ -23,4 +25,10 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = ({ currentUser }) => {
+  return {
+    currentUser
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);
