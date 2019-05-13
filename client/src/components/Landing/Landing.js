@@ -12,6 +12,7 @@ const Landing = () => (
       </Title>
       <Button
         block
+        icon='google'
         type='primary'
         size='large'
         shape='round'
