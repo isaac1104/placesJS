@@ -1,4 +1,4 @@
-import { FETCH_SAVED_PLACES_REQUEST, FETCH_SAVED_PLACES_SUCCESS, FETCH_SAVED_PLACES_FAIL } from '../actions/types';
+import { FETCH_SAVED_PLACES_REQUEST, FETCH_SAVED_PLACES_SUCCESS, FETCH_SAVED_PLACES_FAIL, SAVE_SELECTED_PLACE } from '../actions/types';
 
 const INITIAL_STATE = {
   isFetching: false,
@@ -28,6 +28,17 @@ const savedPlacesReducer = (state = INITIAL_STATE, { type, payload }) => {
         isFetching: false,
         data: [],
         errorMsg: payload
+      };
+    case SAVE_SELECTED_PLACE:
+    const { title, description, latitude, longitude } = payload;
+      return {
+        ...state,
+        isFetching: false,
+        data: [
+          ...state.data,
+          { title, description, latitude, longitude  }
+        ],
+        errorMsg: null
       };
     default:
       return state;
