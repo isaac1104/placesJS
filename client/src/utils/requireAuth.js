@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 export default ChildComponent => {
   class ComposedComponent extends Component {
@@ -29,5 +28,5 @@ export default ChildComponent => {
     return { currentUser };
   };
 
-  return withRouter(connect(mapStateToProps, null)(ComposedComponent));
+  return connect(mapStateToProps, null)(ComposedComponent);
 }
