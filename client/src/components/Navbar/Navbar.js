@@ -27,6 +27,10 @@ class Navbar extends Component {
             mode='horizontal'
             defaultSelectedKeys={['2']}
           />
+          <div className={classes.AvatarContainer}>
+            <Avatar src={data.avatar} size='large' />
+            <Typography className={classes.AvatarText}>Welcome, {data.firstName || ''}</Typography>
+          </div>
         </Header>
       );
     }
@@ -35,16 +39,8 @@ class Navbar extends Component {
   }
 
   renderDrawer() {
-    const { data } = this.props.currentUser;
-
     return (
       <Drawer
-        title={
-          <div className={classes.DrawerTitle}>
-            <Avatar src={data.avatar} size='large' />
-            <Typography>Welcome, {data.firstName || ''}</Typography>
-          </div>
-        }
         placement='left'
         closable={false}
         onClose={() => this.setState({ visible: false })}
