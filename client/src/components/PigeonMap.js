@@ -25,6 +25,18 @@ class PigeonMap extends Component {
     }
   }
 
+  renderMarkers() {
+    const { data } = this.props.savedPlaces;
+    return data.map(({ _id, latitude, longitude }) => (
+      <Marker
+        key={_id}
+        anchor={[latitude, longitude]}
+        payload={1}
+        onClick={({ event, anchor, pixel }) => console.log(anchor)}
+      />
+    ))
+  }
+
   render() {
     const { latitude, longitude, selectedLocation } = this.state;
     return (
@@ -37,15 +49,17 @@ class PigeonMap extends Component {
           this.props.showModal();
         }}
       >
-        <Marker
-          anchor={[latitude, longitude]}
-          payload={1}
-          onClick={({ event, anchor, pixel }) => console.log(anchor)}
-        />
+        {this.renderMarkers()}
         <AddPlaceModal selectedLocation={selectedLocation} />
       </Map>
     );
   }
 }
 
-export default connect(null, { showModal })(PigeonMap);
+const mapStateToProps = ({ savedPlaces }) => {
+  return {
+    savedPlaces
+  };
+};
+
+export default connect(mapStateToProps, { showModal })(PigeonMap);
