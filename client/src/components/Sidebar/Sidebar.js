@@ -12,9 +12,10 @@ class Sidebar extends Component {
   renderSavedPlaces() {
     const { savedPlaces: { data } } = this.props;
     if (data) {
-      return data.map(({ title }) => (
+      return data.map(({ title, description, latitude, longitude }) => (
         <Button
           className={classes.SavedPlacesTitle}
+          onClick={() => console.log({ title, description, latitude, longitude })}
           key={title}
         >
           {title}
