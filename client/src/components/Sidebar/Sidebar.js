@@ -12,12 +12,12 @@ class Sidebar extends Component {
   renderSavedPlaces() {
     const { savedPlaces: { data } } = this.props;
     if (data) {
-      return data.map(place => (
+      return data.map(({ title }) => (
         <Button
           className={classes.SavedPlacesTitle}
-          key={place._id}
+          key={title}
         >
-          {place.title}
+          {title}
         </Button>
       ));
     }
