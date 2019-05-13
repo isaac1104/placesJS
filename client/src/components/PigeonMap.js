@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
 
-const PigeonMap = () => (
-  <Map
-    metaWheelZoom
-    center={[50.879, 4.6997]}
-    zoom={12}
-    onClick={({ event, latLng, pixel }) => console.log(latLng)}
-  >
-    <Marker
-      anchor={[50.874, 4.6947]}
-      payload={1}
-      onClick={({ event, anchor, pixel }) => console.log(anchor)}
-    />
-  </Map>
-);
+class PigeonMap extends Component {
+  state = {
+    longitude: '',
+    latitude: ''
+  };
+
+  componentDidMount() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(data => {
+        this.setState({ longitude: data.coords.longitude, latitude: data.coords.latitude });
+      });
+    } else {
+      throw new Error('Please allow geolocation on your browser to get your location.');
+    }
+  }
+
+  render() {
+    const { latitude, longitude } = this.state;
+    return (
+      <Map
+        metaWheelZoom
+        center={[latitude, longitude]}
+        zoom={12}
+        onClick={({ event, latLng, pixel }) => console.log(latLng)}
+      >
+        <Marker
+          anchor={[latitude, longitude]}
+          payload={1}
+          onClick={({ event, anchor, pixel }) => console.log(anchor)}
+        />
+      </Map>
+    );
+  }
+}
 
 export default PigeonMap;
