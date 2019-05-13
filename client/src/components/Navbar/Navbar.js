@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Avatar, Icon, Layout, Menu, Drawer, Typography } from 'antd';
+import { Avatar, Button, Icon, Layout, Menu, Drawer, Typography } from 'antd';
 import { connect } from 'react-redux';
 import classes from './Navbar.module.css';
 
@@ -42,7 +42,7 @@ class Navbar extends Component {
         title={
           <div className={classes.DrawerTitle}>
             <Avatar src={data.avatar} size='large' />
-            <Typography>Welcome, {data.firstName}</Typography>
+            <Typography>Welcome, {data.firstName || ''}</Typography>
           </div>
         }
         placement='left'
@@ -50,15 +50,22 @@ class Navbar extends Component {
         onClose={() => this.setState({ visible: false })}
         visible={this.state.visible}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <Typography>Some contents...</Typography>
+        <Typography>Some contents...</Typography>
+        <Button
+          block
+          href='/api/signout'
+          type='danger'
+          icon='logout'
+          className={classes.SignoutButton}
+        >
+          Sign Out
+        </Button>
       </Drawer>
     );
   }
 
   render() {
-    console.log(this.props.currentUser.data);
     return (
       <>
         {this.renderNavbar()}

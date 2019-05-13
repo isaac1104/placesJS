@@ -12,3 +12,9 @@
   justify-content: space-around;
   align-items: center;
 }
+
+.SignoutButton {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
