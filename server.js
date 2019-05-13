@@ -12,7 +12,7 @@ require('./models/User');
 require('./services/passport');
 
 mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongodbURI);
+mongoose.connect(keys.mongodbURI, { useNewUrlParser: true });
 
 app.use(helmet());
 app.use(express.json());
@@ -37,15 +37,3 @@ if (process.env.NODE_ENV === 'production') {
 app.listen(PORT, () => {
   console.log(`Server on PORT: ${PORT}`);
 });
-
-/*
-1. Create 'dev.js' file inside the config folder.
-2. Paste the code below and replace the key values.
-
-module.exports = {
-  googleClientID: 'YOUR_GOOGLE_CLIENT_ID',
-  googleClientSecret: 'YOUR_GOOGLE_CLIENT_SECRET',
-  mongodbURI: 'YOUR_MONGODB_URI',
-  cookieKey: 'RANDOM_STRING',
-};
-*/
