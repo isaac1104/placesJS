@@ -3,7 +3,11 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #282c34;
-  color: #ffffff;
   text-align: center;
+  background-color: #FFDEE9;
+  background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+}
+
+.LandingTitle {
+  color: #4d68c3 !important; 
 }
