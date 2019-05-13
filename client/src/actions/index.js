@@ -12,6 +12,17 @@ export const fetchCurrentUserData = () => async dispatch => {
   }
 };
 
+export const fetchSavedPlaces = () => async dispatch => {
+  dispatch({ type: types.FETCH_SAVED_PLACES_REQUEST, payload: true });
+  try {
+    const request = await axios.get('/api/saved_places');
+    const { data } = request;
+    dispatch({ type: types.FETCH_SAVED_PLACES_SUCCESS, payload: data });
+  } catch (e) {
+    dispatch({ type: types.FETCH_SAVED_PLACES_FAIL, payload: e });
+  }
+};
+
 export const saveSelectedPlace = value => async dispatch => {
   try {
     const request = await axios.post('/api/saved_places', value);
