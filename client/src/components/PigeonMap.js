@@ -4,14 +4,15 @@ import Marker from 'pigeon-marker';
 
 const PigeonMap = () => (
   <Map
+    metaWheelZoom
     center={[50.879, 4.6997]}
     zoom={12}
-    metaWheelZoom
+    onClick={({ event, latLng, pixel }) => console.log(latLng)}
   >
     <Marker
       anchor={[50.874, 4.6947]}
       payload={1}
-      onClick={({ event, anchor, payload }) => {}}
+      onClick={({ event, anchor, pixel }) => console.log(anchor)}
     />
   </Map>
 );
