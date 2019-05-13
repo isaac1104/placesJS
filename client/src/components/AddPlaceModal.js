@@ -12,6 +12,7 @@ class AddPlaceModal extends Component {
   formSubmit = value => {
     console.log(value);
     this.props.reset();
+    this.props.hideModal();
   };
 
   renderInput({ input }) {
