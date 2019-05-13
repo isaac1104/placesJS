@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
-import { Modal, Typography } from 'antd';
-import AddPlaceForm from './AddPlaceForm';
+import AddPlaceModal from './AddPlaceModal';
 
 class PigeonMap extends Component {
   state = {
@@ -39,16 +38,7 @@ class PigeonMap extends Component {
           payload={1}
           onClick={({ event, anchor, pixel }) => console.log(anchor)}
         />
-        <Modal
-          title='Would you like to save this location?'
-          visible={this.state.modalVisible}
-          onCancel={() => this.setState({ modalVisible: false })}
-        >
-          <Typography>
-            {`Latitude & Longitude: ${selectedLocation[0]}, ${selectedLocation[1]}`}
-          </Typography>
-          <AddPlaceForm />
-        </Modal>
+        <AddPlaceModal />
       </Map>
     );
   }
