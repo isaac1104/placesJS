@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Layout, Menu, Drawer } from 'antd';
+import { Avatar, Icon, Layout, Menu, Drawer, Typography } from 'antd';
 import { connect } from 'react-redux';
 import classes from './Navbar.module.css';
 
@@ -35,11 +35,18 @@ class Navbar extends Component {
   }
 
   renderDrawer() {
+    const { data } = this.props.currentUser;
+
     return (
       <Drawer
-        title='Basic Drawer'
+        title={
+          <div className={classes.DrawerTitle}>
+            <Avatar src={data.avatar} size='large' />
+            <Typography>Welcome, {data.firstName}</Typography>
+          </div>
+        }
         placement='left'
-        closable
+        closable={false}
         onClose={() => this.setState({ visible: false })}
         visible={this.state.visible}
       >
@@ -51,6 +58,7 @@ class Navbar extends Component {
   }
 
   render() {
+    console.log(this.props.currentUser.data);
     return (
       <>
         {this.renderNavbar()}
