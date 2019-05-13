@@ -1,22 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Drawer, Typography } from 'antd';
-import { hideSidebar } from '../../actions'
+import { Button, Drawer } from 'antd';
+import { fetchSavedPlaces, hideSidebar } from '../../actions'
 import classes from './Sidebar.module.css';
 
 class Sidebar extends Component {
-  render() {
-    const { sidebarVisibility: { visible }, hideSidebar } = this.props;
+  componentDidMount() {
+    this.props.fetchSavedPlaces();
+  }
 
+  renderSavedPlaces() {
+    const { savedPlaces: { data } } = this.props;
+    if (data) {
+      return data.map(place => (
+        <Button
+          className={classes.SavedPlacesTitle}
+          key={place._id}
+        >
+          {place.title}
+        </Button>
+      ));
+    }
+
+    return null;
+  }
+
+  render() {
+    const { currentUser: { data: { firstName} }, sidebarVisibility: { visible }, hideSidebar } = this.props;
     return (
       <Drawer
+        title={`Saved Places For ${firstName}`}
         placement='left'
         closable={false}
         onClose={() => hideSidebar()}
         visible={visible}
       >
-        <Typography>Some contents...</Typography>
-        <Typography>Some contents...</Typography>
+        {this.renderSavedPlaces()}
         <Button
           block
           href='/api/signout'
@@ -31,10 +50,12 @@ class Sidebar extends Component {
   }
 }
 
-const mapStateToProps = ({ sidebarVisibility }) => {
+const mapStateToProps = ({ currentUser, savedPlaces, sidebarVisibility }) => {
   return {
+    currentUser,
+    savedPlaces,
     sidebarVisibility
   };
 };
 
-export default connect(mapStateToProps, { hideSidebar })(Sidebar);
+export default connect(mapStateToProps, { fetchSavedPlaces, hideSidebar })(Sidebar);
