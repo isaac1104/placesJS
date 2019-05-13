@@ -17,7 +17,7 @@ class PigeonMap extends Component {
       navigator.geolocation.getCurrentPosition(data => {
         this.setState({ longitude: data.coords.longitude, latitude: data.coords.latitude });
       },
-      () => { throw new Error('Could not retrieve current location. Please try again later.') },
+      () => { console.log('Could not retrieve current location. Please try again later.'); },
       { timeout: 10000 }
     );
     } else {

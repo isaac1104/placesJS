@@ -9,6 +9,10 @@ import { hideModal, saveSelectedPlace } from '../actions';
 const { TextArea } = Input;
 
 class AddPlaceModal extends Component {
+  state = {
+    formSubmitting: false
+  };
+
   formSubmit = async value => {
     const { selectedLocation, saveSelectedPlace, reset, hideModal } = this.props;
     const [ latitude, longitude ] = selectedLocation;
@@ -17,7 +21,9 @@ class AddPlaceModal extends Component {
       latitude,
       longitude
     };
+    this.setState({ formSubmitting: true });
     await saveSelectedPlace(data);
+    await this.setState({ formSubmitting: false });
     hideModal();
     reset();
   };
@@ -58,6 +64,7 @@ class AddPlaceModal extends Component {
         title='Would you like to save this location?'
         visible={visible}
         onCancel={this.handleModalHide}
+        confirmLoading={this.state.formSubmitting}
         onOk={handleSubmit(this.formSubmit)}
       >
         <Typography>
