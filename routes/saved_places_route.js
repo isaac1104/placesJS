@@ -8,6 +8,23 @@ module.exports = app => {
   });
 
   app.post('/api/saved_places', async (req, res) => {
-    console.log(req.body);
-  )};
+    const { title, description, latitude, longitude } = req.body;
+    const currentPlace = await SavedPlace.find({ latitude, latitude });
+    if (currentPlace.length !== 0) {
+      return;
+    }
+    const savedPlace = new SavedPlace({
+      title,
+      description,
+      latitude,
+      longitude,
+      _user: req.user.id
+    });
+    try {
+      await savedPlace.save();
+      res.status(200).send(savedPlace);
+    } catch (e) {
+      res.status(400).send(e);
+    }
+  });
 };

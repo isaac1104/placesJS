@@ -4,15 +4,22 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Modal, Typography, Input, Form } from 'antd';
-import { hideModal } from '../actions';
+import { hideModal, saveSelectedPlace } from '../actions';
 
 const { TextArea } = Input;
 
 class AddPlaceModal extends Component {
-  formSubmit = value => {
-    console.log(value);
-    this.props.reset();
-    this.props.hideModal();
+  formSubmit = async value => {
+    const { selectedLocation, saveSelectedPlace, reset, hideModal } = this.props;
+    const [ latitude, longitude ] = selectedLocation;
+    const data = {
+      ...value,
+      latitude,
+      longitude
+    };
+    await saveSelectedPlace(data);
+    hideModal();
+    reset();
   };
 
   renderInput({ input }) {
@@ -80,5 +87,5 @@ const mapStateToProps = ({ modalVisibility }) => {
 export default compose(
   withRouter,
   reduxForm({ form: 'place', destroyOnUnmount: true }),
-  connect(mapStateToProps, { hideModal })
+  connect(mapStateToProps, { hideModal, saveSelectedPlace })
 )(AddPlaceModal);

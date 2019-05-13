@@ -7,7 +7,8 @@ const savedPlaceSchema = new Schema({
     required: true
   },
   description: String,
-  location: Array,
+  latitude: Number,
+  longitude: Number,
   _user: { type: Schema.Types.ObjectId, ref: 'user' }
 });
 

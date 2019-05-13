@@ -12,6 +12,16 @@ export const fetchCurrentUserData = () => async dispatch => {
   }
 };
 
+export const saveSelectedPlace = value => async dispatch => {
+  try {
+    const request = await axios.post('/api/saved_places', value);
+    const { data } = request;
+    dispatch({ type: types.SAVE_SELECTED_PLACE, payload: data });
+  } catch (e) {
+    dispatch({ type: types.SAVE_SELECTED_PLACE, payload: e });
+  }
+};
+
 export const showModal = () => ({
   type: types.SHOW_MODAL,
   payload: true
