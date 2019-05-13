@@ -62,6 +62,7 @@ class AddPlaceModal extends Component {
     return (
       <Modal
         title='Would you like to save this location?'
+        okText='Save'
         visible={visible}
         onCancel={this.handleModalHide}
         confirmLoading={this.state.formSubmitting}
