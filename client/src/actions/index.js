@@ -42,3 +42,13 @@ export const hideModal = () => ({
   type: types.HIDE_MODAL,
   payload: false
 });
+
+export const showSidebar = () => ({
+  type: types.SHOW_SIDEBAR,
+  payload: true
+});
+
+export const hideSidebar = () => ({
+  type: types.HIDE_SIDEBAR,
+  payload: false
+});

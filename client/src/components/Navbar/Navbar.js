@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Avatar, Button, Icon, Layout, Menu, Drawer, Typography } from 'antd';
+import { Avatar, Icon, Layout, Menu, Typography } from 'antd';
 import { connect } from 'react-redux';
+import { showSidebar } from '../../actions';
+import Sidebar from '../Sidebar/Sidebar';
 import classes from './Navbar.module.css';
 
 const { Header } = Layout;
@@ -11,14 +13,14 @@ class Navbar extends Component {
   };
 
   renderNavbar() {
-    const { data } = this.props.currentUser;
+    const { currentUser: { data }, showSidebar } = this.props;
 
     if (data) {
       return (
         <Header>
           <Icon
             className={classes.MenuIcon}
-            onClick={() => this.setState({ visible: true })}
+            onClick={() => showSidebar()}
             type='menu-unfold'
           />
           <Menu
@@ -38,34 +40,11 @@ class Navbar extends Component {
     return null;
   }
 
-  renderDrawer() {
-    return (
-      <Drawer
-        placement='left'
-        closable={false}
-        onClose={() => this.setState({ visible: false })}
-        visible={this.state.visible}
-      >
-        <Typography>Some contents...</Typography>
-        <Typography>Some contents...</Typography>
-        <Button
-          block
-          href='/api/signout'
-          type='danger'
-          icon='logout'
-          className={classes.SignoutButton}
-        >
-          Sign Out
-        </Button>
-      </Drawer>
-    );
-  }
-
   render() {
     return (
       <>
         {this.renderNavbar()}
-        {this.renderDrawer()}
+        <Sidebar />
       </>
     );
   }
@@ -77,4 +56,4 @@ const mapStateToProps = ({ currentUser }) => {
   };
 };
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, { showSidebar })(Navbar);

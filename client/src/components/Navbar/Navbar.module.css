@@ -17,12 +17,6 @@
   right: 1em;
 }
 
-.SignoutButton {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
 .AvatarText {
   color: white;
   margin-left: 1em;
