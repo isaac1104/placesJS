@@ -7,8 +7,16 @@ class Home extends Component {
   render() {
     return (
       <div className={classes.HomeContainer}>
-        <Map center={[50.879, 4.6997]} zoom={12}>
-          <Marker anchor={[50.874, 4.6947]} payload={1} onClick={({ event, anchor, payload }) => {}} />
+        <Map
+          center={[50.879, 4.6997]}
+          zoom={12}
+          metaWheelZoom
+        >
+          <Marker 
+            anchor={[50.874, 4.6947]}
+            payload={1}
+            onClick={({ event, anchor, payload }) => {}}
+          />
         </Map>
       </div>
     );
