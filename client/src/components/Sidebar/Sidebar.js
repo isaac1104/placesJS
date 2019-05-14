@@ -12,15 +12,19 @@ class Sidebar extends Component {
   renderSavedPlaces() {
     const { savedPlaces: { data }, navigateToSelectedPlace, hideSidebar } = this.props;
     if (data) {
-      return data.map(({ title, description, latitude, longitude }) => (
+      return data.map(({ id, title, description, latitude, longitude }) => (
         <List.Item
           className={classes.SavedPlacesButton}
           onClick={() => navigateToSelectedPlace([latitude, longitude], hideSidebar)}
-          key={title}
+          key={id}
         >
           <Icon type='global' className={classes.GlobeIcon} />
           <Typography className={classes.SavedPlacesText}>{title}</Typography>
-          <Icon type='delete' className={classes.DeleteIcon} />
+          <Icon
+            type='delete'
+            className={classes.DeleteIcon}
+            onClick={() => console.log(id)}
+          />
         </List.Item>
       ));
     }
