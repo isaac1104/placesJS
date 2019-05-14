@@ -6,6 +6,11 @@
   border: none;
 }
 
-.SavedPlacesTitle {
+.SavedPlacesButton {
   width: 100%;
+  cursor: pointer;
+}
+
+.SavedPlacesText {
+  color: #ffffff;
 }

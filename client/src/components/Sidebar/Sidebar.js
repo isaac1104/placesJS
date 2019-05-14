@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Drawer } from 'antd';
+import { Button, Drawer, List, Typography, Icon } from 'antd';
 import { fetchSavedPlaces, hideSidebar, navigateToSelectedPlace } from '../../actions'
 import classes from './Sidebar.module.css';
 
@@ -13,13 +13,13 @@ class Sidebar extends Component {
     const { savedPlaces: { data }, navigateToSelectedPlace, hideSidebar } = this.props;
     if (data) {
       return data.map(({ title, description, latitude, longitude }) => (
-        <Button
-          className={classes.SavedPlacesTitle}
+        <List.Item
+          className={classes.SavedPlacesButton}
           onClick={() => navigateToSelectedPlace([latitude, longitude], hideSidebar)}
           key={title}
         >
-          {title}
-        </Button>
+          <Typography className={classes.SavedPlacesText}><Icon type='global' /> {title}</Typography>
+        </List.Item>
       ));
     }
 
@@ -27,10 +27,10 @@ class Sidebar extends Component {
   }
 
   render() {
-    const { currentUser: { data: { firstName} }, sidebarVisibility: { visible }, hideSidebar } = this.props;
+    const { sidebarVisibility: { visible }, hideSidebar } = this.props;
     return (
       <Drawer
-        title={`Saved Places For ${firstName}`}
+        title='My saved places'
         placement='left'
         closable={false}
         onClose={() => hideSidebar()}
@@ -51,9 +51,8 @@ class Sidebar extends Component {
   }
 }
 
-const mapStateToProps = ({ currentUser, savedPlaces, sidebarVisibility }) => {
+const mapStateToProps = ({ savedPlaces, sidebarVisibility }) => {
   return {
-    currentUser,
     savedPlaces,
     sidebarVisibility
   };
