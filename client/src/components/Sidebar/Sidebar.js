@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Drawer } from 'antd';
-import { fetchSavedPlaces, hideSidebar } from '../../actions'
+import { fetchSavedPlaces, hideSidebar, navigateToSelectedPlace } from '../../actions'
 import classes from './Sidebar.module.css';
 
 class Sidebar extends Component {
@@ -10,12 +10,12 @@ class Sidebar extends Component {
   }
 
   renderSavedPlaces() {
-    const { savedPlaces: { data } } = this.props;
+    const { savedPlaces: { data }, navigateToSelectedPlace } = this.props;
     if (data) {
       return data.map(({ title, description, latitude, longitude }) => (
         <Button
           className={classes.SavedPlacesTitle}
-          onClick={() => console.log({ title, description, latitude, longitude })}
+          onClick={() => navigateToSelectedPlace([latitude, longitude])}
           key={title}
         >
           {title}
@@ -59,4 +59,4 @@ const mapStateToProps = ({ currentUser, savedPlaces, sidebarVisibility }) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchSavedPlaces, hideSidebar })(Sidebar);
+export default connect(mapStateToProps, { fetchSavedPlaces, hideSidebar, navigateToSelectedPlace })(Sidebar);
