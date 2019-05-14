@@ -41,8 +41,8 @@ class PigeonMap extends Component {
     return (
       <Map
         metaWheelZoom
-        center={[latitude, longitude]}
         zoom={12}
+        center={[latitude, longitude]}
         onClick={async ({ event, latLng, pixel }) => {
           await this.setState({ selectedLocation: latLng });
           this.props.showModal();

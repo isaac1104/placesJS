@@ -10,12 +10,12 @@ class Sidebar extends Component {
   }
 
   renderSavedPlaces() {
-    const { savedPlaces: { data }, navigateToSelectedPlace } = this.props;
+    const { savedPlaces: { data }, navigateToSelectedPlace, hideSidebar } = this.props;
     if (data) {
       return data.map(({ title, description, latitude, longitude }) => (
         <Button
           className={classes.SavedPlacesTitle}
-          onClick={() => navigateToSelectedPlace([latitude, longitude])}
+          onClick={() => navigateToSelectedPlace([latitude, longitude], hideSidebar)}
           key={title}
         >
           {title}

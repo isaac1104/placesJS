@@ -33,10 +33,12 @@ export const saveSelectedPlace = value => async dispatch => {
   }
 };
 
-export const navigateToSelectedPlace = location => ({
-  type: types.NAVIGATE_TO_SELECTED_PLACE,
-  payload: location
-});
+export const navigateToSelectedPlace = (location, callback) => dispatch => {
+  dispatch({ type: types.NAVIGATE_TO_SELECTED_PLACE, payload: location });
+  if (callback) {
+    callback();
+  }
+};
 
 export const showModal = () => ({
   type: types.SHOW_MODAL,
