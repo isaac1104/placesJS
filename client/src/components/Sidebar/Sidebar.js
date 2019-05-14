@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Drawer, List, Typography, Icon } from 'antd';
-import { fetchSavedPlaces, hideSidebar, navigateToSelectedPlace } from '../../actions'
+import { fetchSavedPlaces, hideSidebar, navigateToSelectedPlace, deleteSelectedPlace } from '../../actions'
 import classes from './Sidebar.module.css';
 
 class Sidebar extends Component {
@@ -10,7 +10,7 @@ class Sidebar extends Component {
   }
 
   renderSavedPlaces() {
-    const { savedPlaces: { data }, navigateToSelectedPlace, hideSidebar } = this.props;
+    const { savedPlaces: { data }, navigateToSelectedPlace, hideSidebar, deleteSelectedPlace } = this.props;
     if (data) {
       return data.map(({ uuid, title, description, latitude, longitude }) => (
         <List.Item
@@ -27,7 +27,7 @@ class Sidebar extends Component {
           <Icon
             type='delete'
             className={classes.DeleteIcon}
-            onClick={() => console.log(uuid)}
+            onClick={() => deleteSelectedPlace(uuid)}
           />
         </List.Item>
       ));
@@ -59,4 +59,4 @@ const mapStateToProps = ({ savedPlaces, sidebarVisibility }) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchSavedPlaces, hideSidebar, navigateToSelectedPlace })(Sidebar);
+export default connect(mapStateToProps, { fetchSavedPlaces, hideSidebar, navigateToSelectedPlace, deleteSelectedPlace })(Sidebar);

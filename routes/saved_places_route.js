@@ -29,4 +29,14 @@ module.exports = app => {
       res.status(400).send(e);
     }
   });
+
+  app.delete('/api/saved_places', requireAuth, async (req, res) => {
+    const { uuid } = req.query;
+    try {
+      await SavedPlace.deleteOne({ uuid });
+      res.sendStatus(200);
+    } catch (e) {
+      res.status(400).send(e);
+    }
+  });
 };

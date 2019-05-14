@@ -15,11 +15,11 @@ class PigeonMap extends Component {
       navigator.geolocation.getCurrentPosition(data => {
         this.props.navigateToSelectedPlace([data.coords.latitude, data.coords.longitude]);
       },
-      () => { console.log('Could not retrieve current location. Please try again later.'); },
+      () => { console.error('Could not retrieve current location. Please try again later.'); },
       { timeout: 10000 }
     );
     } else {
-      console.log('Please allow geolocation on your browser to get your location.');
+      console.error('Please allow geolocation on your browser to get your location.');
     }
   }
 

@@ -1,4 +1,10 @@
-import { FETCH_SAVED_PLACES_REQUEST, FETCH_SAVED_PLACES_SUCCESS, FETCH_SAVED_PLACES_FAIL, SAVE_SELECTED_PLACE } from '../actions/types';
+import {
+  FETCH_SAVED_PLACES_REQUEST,
+  FETCH_SAVED_PLACES_SUCCESS,
+  FETCH_SAVED_PLACES_FAIL,
+  SAVE_SELECTED_PLACE,
+  DELETE_SELECTED_PLACE
+} from '../actions/types';
 
 const INITIAL_STATE = {
   isFetching: false,
@@ -38,6 +44,13 @@ const savedPlacesReducer = (state = INITIAL_STATE, { type, payload }) => {
           ...state.data,
           { title, description, latitude, longitude, uuid  }
         ],
+        errorMsg: null
+      };
+    case DELETE_SELECTED_PLACE:
+      return {
+        ...state,
+        isFetching: false,
+        data: state.data.filter(place => place.uuid !== payload),
         errorMsg: null
       };
     default:

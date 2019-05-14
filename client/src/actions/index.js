@@ -35,13 +35,12 @@ export const saveSelectedPlace = value => async dispatch => {
 
 export const deleteSelectedPlace = uuid => async dispatch => {
   try {
-    const request = await axios.delete('/api/saved_places', {
+    await axios.delete('/api/saved_places', {
       params: {
         uuid
       }
     });
-    const { data } = request;
-    dispatch({ type: types.DELETE_SELECTED_PLACE, payload: data });
+    dispatch({ type: types.DELETE_SELECTED_PLACE, payload: uuid });
   } catch (e) {
     dispatch({ type: types.DELETE_SELECTED_PLACE, payload: e });
   }
