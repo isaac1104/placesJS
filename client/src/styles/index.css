@@ -10,10 +10,15 @@ body {
 }
 
 .ant-drawer-wrapper-body {
-  background-color: #FFDEE9;
-  background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+  background-color: #0f0f0f;
+  background-image: linear-gradient(315deg, #2d3436 0%, #0f0f0f 74%);
 }
 
 .ant-drawer-header {
-  background-color: #B5FFFC;
+  background-color: #0f0f0f;
+  border: none;
+}
+
+.ant-drawer-title {
+  color: #ffffff;
 }

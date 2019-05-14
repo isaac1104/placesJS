@@ -2,7 +2,8 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  background-color: #FFDEE9;
+  background-color: #2d3436;
+  border: none;
 }
 
 .SavedPlacesTitle {

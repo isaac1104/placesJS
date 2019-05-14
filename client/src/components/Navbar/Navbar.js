@@ -17,7 +17,7 @@ class Navbar extends Component {
 
     if (data) {
       return (
-        <Header>
+        <Header className={classes.Navbar}>
           <Icon
             className={classes.MenuIcon}
             onClick={() => showSidebar()}
@@ -26,8 +26,6 @@ class Navbar extends Component {
           <Menu
             className={classes.NavbarMenu}
             theme='dark'
-            mode='horizontal'
-            defaultSelectedKeys={['2']}
           />
           <div className={classes.AvatarContainer}>
             <Avatar src={data.avatar} size='large' />
