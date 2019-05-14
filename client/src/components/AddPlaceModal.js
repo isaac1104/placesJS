@@ -30,12 +30,17 @@ class AddPlaceModal extends Component {
     reset();
   };
 
-  renderInput({ input, meta }) {
-    console.log(meta);
+  renderInput({ input, meta: { error, touched } }) {
     return (
-      <Form.Item label='Title'>
+      <Form.Item
+        required
+        label='Title'
+        validateStatus={touched && error ? 'error' : ''}
+        help={touched ? error : ''}
+      >
         <Input
           {...input}
+          allowClear
           autoComplete='off'
           onFocus={event => event.target.select()}
         />
@@ -45,7 +50,7 @@ class AddPlaceModal extends Component {
 
   renderTextArea({ input }) {
     return (
-      <Form.Item label='Description'>
+      <Form.Item label='Description (Optional)'>
         <TextArea
           {...input}
           rows={4}
@@ -100,9 +105,8 @@ const mapStateToProps = ({ modalVisibility }) => {
 const validate = value => {
   const errors = {};
   if (!value.title) {
-    errors.title = 'Title is required!'
+    errors.title = 'Title is required!';
   }
-  console.log(errors);
   return errors;
 };
 
