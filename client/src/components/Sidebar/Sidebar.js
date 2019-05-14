@@ -18,7 +18,9 @@ class Sidebar extends Component {
           onClick={() => navigateToSelectedPlace([latitude, longitude], hideSidebar)}
           key={title}
         >
-          <Typography className={classes.SavedPlacesText}><Icon type='global' /> {title}</Typography>
+          <Icon type='global' className={classes.GlobeIcon} />
+          <Typography className={classes.SavedPlacesText}>{title}</Typography>
+          <Icon type='delete' className={classes.DeleteIcon} />
         </List.Item>
       ));
     }
