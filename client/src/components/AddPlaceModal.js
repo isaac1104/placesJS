@@ -61,6 +61,7 @@ class AddPlaceModal extends Component {
     const { modalVisibility: { visible }, selectedLocation, handleSubmit } = this.props;
     return (
       <Modal
+        centered
         title='Would you like to save this location?'
         okText='Save'
         visible={visible}
