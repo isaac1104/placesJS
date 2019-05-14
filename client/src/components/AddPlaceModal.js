@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Modal, Typography, Input, Form } from 'antd';
+import uuidv4 from 'uuid/v4';
 import { hideModal, saveSelectedPlace } from '../actions';
 
 const { TextArea } = Input;
@@ -19,7 +20,8 @@ class AddPlaceModal extends Component {
     const data = {
       ...value,
       latitude,
-      longitude
+      longitude,
+      uuid: uuidv4()
     };
     this.setState({ formSubmitting: true });
     await saveSelectedPlace(data);

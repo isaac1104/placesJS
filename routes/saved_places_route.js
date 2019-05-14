@@ -1,4 +1,3 @@
-const uuidv4 = require('uuid/v4');
 const mongoose = require('mongoose');
 const SavedPlace = mongoose.model('SavedPlace');
 const requireAuth = require('../middlewares/requireAuth');
@@ -10,7 +9,7 @@ module.exports = app => {
   });
 
   app.post('/api/saved_places', requireAuth, async (req, res) => {
-    const { title, description, latitude, longitude } = req.body;
+    const { title, description, latitude, longitude, uuid } = req.body;
     const currentPlace = await SavedPlace.find({ latitude, latitude });
     if (currentPlace.length !== 0) {
       return;
@@ -20,7 +19,7 @@ module.exports = app => {
       description,
       latitude,
       longitude,
-      id: uuidv4(),
+      uuid,
       _user: req.user.id
     });
     try {

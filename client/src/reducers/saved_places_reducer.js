@@ -30,13 +30,13 @@ const savedPlacesReducer = (state = INITIAL_STATE, { type, payload }) => {
         errorMsg: payload
       };
     case SAVE_SELECTED_PLACE:
-    const { title, description, latitude, longitude } = payload;
+    const { title, description, latitude, longitude, uuid } = payload;
       return {
         ...state,
         isFetching: false,
         data: [
           ...state.data,
-          { title, description, latitude, longitude  }
+          { title, description, latitude, longitude, uuid  }
         ],
         errorMsg: null
       };

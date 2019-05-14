@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const savedPlaceSchema = new Schema({
-  id: {
+  uuid: {
     type: String,
     required: true
   },

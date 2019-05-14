@@ -25,11 +25,11 @@ class PigeonMap extends Component {
 
   renderMarkers() {
     const { data } = this.props.savedPlaces;
-    return data.map(({ id, title, description, latitude, longitude }) => (
+    return data.map(({ uuid, title, description, latitude, longitude }) => (
       <Marker
-        key={id}
+        key={uuid}
         anchor={[latitude, longitude]}
-        onClick={() => console.log(id)}
+        onClick={() => console.log(uuid)}
         payload={1}
       />
     ));
