@@ -32,7 +32,7 @@ class PigeonMap extends Component {
         onClick={() => console.log({ title, description, latitude, longitude })}
         payload={1}
       />
-    ))
+    ));
   }
 
   renderMap() {
