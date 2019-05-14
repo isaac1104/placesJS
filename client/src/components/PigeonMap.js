@@ -2,20 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
-import { showModal } from '../actions';
+import { showModal, navigateToSelectedPlace } from '../actions';
 import AddPlaceModal from './AddPlaceModal';
 
 class PigeonMap extends Component {
   state = {
-    longitude: '',
-    latitude: '',
     selectedLocation: []
   };
 
   componentDidMount() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(data => {
-        this.setState({ longitude: data.coords.longitude, latitude: data.coords.latitude });
+        this.props.navigateToSelectedPlace([data.coords.latitude, data.coords.longitude]);
       },
       () => { console.log('Could not retrieve current location. Please try again later.'); },
       { timeout: 10000 }
@@ -38,7 +36,8 @@ class PigeonMap extends Component {
   }
 
   renderMap() {
-    const { latitude, longitude, selectedLocation } = this.state;
+    const { selectedLocation } = this.state;
+    const { latitude, longitude } = this.props.location;
     return (
       <Map
         metaWheelZoom
@@ -64,10 +63,11 @@ class PigeonMap extends Component {
   }
 }
 
-const mapStateToProps = ({ savedPlaces }) => {
+const mapStateToProps = ({ savedPlaces, location }) => {
   return {
-    savedPlaces
+    savedPlaces,
+    location
   };
 };
 
-export default connect(mapStateToProps, { showModal })(PigeonMap);
+export default connect(mapStateToProps, { showModal, navigateToSelectedPlace })(PigeonMap);
