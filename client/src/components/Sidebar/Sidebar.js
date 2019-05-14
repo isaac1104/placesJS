@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Drawer, List, Typography, Icon } from 'antd';
+import { Drawer, List, Typography, Icon } from 'antd';
 import { fetchSavedPlaces, hideSidebar, navigateToSelectedPlace } from '../../actions'
 import classes from './Sidebar.module.css';
 
@@ -37,15 +37,6 @@ class Sidebar extends Component {
         visible={visible}
       >
         {this.renderSavedPlaces()}
-        <Button
-          block
-          href='/api/signout'
-          type='danger'
-          icon='logout'
-          className={classes.SignoutButton}
-        >
-          Sign Out
-        </Button>
       </Drawer>
     );
   }

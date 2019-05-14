@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Avatar, Icon, Layout, Menu, Typography } from 'antd';
+import { Avatar, Button, Icon, Layout, Menu, Typography, Popover } from 'antd';
 import { connect } from 'react-redux';
 import { showSidebar } from '../../actions';
 import Sidebar from '../Sidebar/Sidebar';
@@ -28,7 +28,23 @@ class Navbar extends Component {
             theme='dark'
           />
           <div className={classes.AvatarContainer}>
-            <Avatar src={data.avatar} size='large' />
+            <Popover
+              trigger='click'
+              placement='left'
+              content={(
+                <Button
+                  block
+                  href='/api/signout'
+                  type='danger'
+                  icon='logout'
+                  className={classes.SignoutButton}
+                >
+                  Sign Out
+                </Button>
+              )}
+            >
+              <Avatar src={data.avatar} size='large' className={classes.NavbarAvatar} />
+            </Popover>
             <Typography className={classes.AvatarText}>Welcome, {data.firstName || ''}</Typography>
           </div>
         </Header>

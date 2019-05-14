@@ -22,3 +22,7 @@ body {
 .ant-drawer-title {
   color: #ffffff;
 }
+
+.ant-popover-inner {
+  background-color: #1f2124;
+}

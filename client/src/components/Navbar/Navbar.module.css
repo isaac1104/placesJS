@@ -14,6 +14,10 @@
   left: 1em;
 }
 
+.NavbarAvatar {
+  cursor: pointer;
+}
+
 .AvatarContainer {
   display: flex;
   align-items: center;
@@ -24,4 +28,9 @@
 .AvatarText {
   color: white;
   margin-left: 1em;
+}
+
+.SignoutButton {
+  background-color: #2d3436;
+  border: none;
 }
