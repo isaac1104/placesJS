@@ -35,6 +35,15 @@ class PigeonMap extends Component {
     ));
   }
 
+  renderModal(location) {
+    const { visible } = this.props.modalVisibility;
+    if (visible) {
+      return <AddPlaceModal selectedLocation={location} />;
+    }
+
+    return null;
+  }
+
   renderMap() {
     const { selectedLocation } = this.state;
     const { latitude, longitude } = this.props.location;
@@ -49,7 +58,7 @@ class PigeonMap extends Component {
         }}
       >
         {this.renderMarkers()}
-        <AddPlaceModal selectedLocation={selectedLocation} />
+        {this.renderModal(selectedLocation)}
       </Map>
     );
   }
@@ -63,10 +72,11 @@ class PigeonMap extends Component {
   }
 }
 
-const mapStateToProps = ({ savedPlaces, location }) => {
+const mapStateToProps = ({ savedPlaces, location, modalVisibility }) => {
   return {
     savedPlaces,
-    location
+    location,
+    modalVisibility
   };
 };
 

@@ -30,7 +30,8 @@ class AddPlaceModal extends Component {
     reset();
   };
 
-  renderInput({ input }) {
+  renderInput({ input, meta }) {
+    console.log(meta);
     return (
       <Form.Item label='Title'>
         <Input
@@ -64,6 +65,7 @@ class AddPlaceModal extends Component {
     return (
       <Modal
         centered
+        destroyOnClose
         title='Would you like to save this location?'
         okText='Save'
         visible={visible}
@@ -95,8 +97,17 @@ const mapStateToProps = ({ modalVisibility }) => {
   };
 };
 
+const validate = value => {
+  const errors = {};
+  if (!value.title) {
+    errors.title = 'Title is required!'
+  }
+  console.log(errors);
+  return errors;
+};
+
 export default compose(
   withRouter,
-  reduxForm({ form: 'place', destroyOnUnmount: true }),
+  reduxForm({ validate, form: 'place', destroyOnUnmount: true }),
   connect(mapStateToProps, { hideModal, saveSelectedPlace })
 )(AddPlaceModal);
