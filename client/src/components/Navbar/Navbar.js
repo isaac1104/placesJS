@@ -40,11 +40,21 @@ class Navbar extends Component {
     return null;
   }
 
+  renderSidebar() {
+    const { currentUser: { data } } = this.props;
+
+    if (data) {
+      return <Sidebar />;
+    }
+
+    return null;
+  }
+
   render() {
     return (
       <>
         {this.renderNavbar()}
-        <Sidebar />
+        {this.renderSidebar()}
       </>
     );
   }
