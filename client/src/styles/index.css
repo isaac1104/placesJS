@@ -26,3 +26,7 @@ body {
 .ant-popover-inner {
   background-color: #1f2124;
 }
+
+.ant-popover-message-title {
+  color: #ffffff;
+}

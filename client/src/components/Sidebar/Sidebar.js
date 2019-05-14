@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Drawer, List, Typography, Icon } from 'antd';
+import { Drawer, List, Typography, Icon, Popconfirm, message } from 'antd';
 import { fetchSavedPlaces, hideSidebar, navigateToSelectedPlace, deleteSelectedPlace } from '../../actions'
 import classes from './Sidebar.module.css';
 
@@ -24,11 +24,21 @@ class Sidebar extends Component {
           >
             {title}
           </Typography>
-          <Icon
-            type='delete'
-            className={classes.DeleteIcon}
-            onClick={() => deleteSelectedPlace(uuid)}
-          />
+          <Popconfirm
+            title='Are you sure you want to delete this place?'
+            icon={<Icon type='exclamation' />}
+            okType='danger'
+            okText='Yes'
+            cancelText='No'
+            placement='right'
+            trigger='click'
+            onConfirm={() => deleteSelectedPlace(uuid, () => message.success('Place has been removed successfully'), hideSidebar)}
+          >
+            <Icon
+              type='delete'
+              className={classes.DeleteIcon}
+            />
+          </Popconfirm>
         </List.Item>
       ));
     }
