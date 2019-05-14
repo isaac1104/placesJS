@@ -13,7 +13,9 @@ export default ChildComponent => {
 
     redirectUser() {
       const { isFetching, data } = this.props.currentUser;
-      if (isFetching === null) return;
+      if (isFetching === null) {
+        return;
+      }
       if (!isFetching && typeof data !== 'object') {
         this.props.history.push('/');
       }
@@ -28,5 +30,5 @@ export default ChildComponent => {
     return { currentUser };
   };
 
-  return connect(mapStateToProps, null)(ComposedComponent);
+  return connect(mapStateToProps)(ComposedComponent);
 }

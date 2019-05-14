@@ -25,7 +25,6 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./routes/test_route')(app);
 require('./routes/auth_route')(app);
 require('./routes/saved_places_route')(app);
 
