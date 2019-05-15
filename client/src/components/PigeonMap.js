@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
-import { showModal, navigateToSelectedPlace } from '../actions';
+import { showModal, navigateToSelectedPlace, fetchSavedPlace } from '../actions';
 import AddPlaceModal from './AddPlaceModal';
 
 class PigeonMap extends Component {
@@ -24,12 +24,12 @@ class PigeonMap extends Component {
   }
 
   renderMarkers() {
-    const { data } = this.props.savedPlaces;
+    const { savedPlaces : { data }, fetchSavedPlace } = this.props;
     return data.map(({ uuid, title, description, latitude, longitude }) => (
       <Marker
         key={uuid}
         anchor={[latitude, longitude]}
-        onClick={() => console.log(uuid)}
+        onClick={() => fetchSavedPlace(uuid)}
         payload={1}
       />
     ));
@@ -80,4 +80,4 @@ const mapStateToProps = ({ savedPlaces, location, modalVisibility }) => {
   };
 };
 
-export default connect(mapStateToProps, { showModal, navigateToSelectedPlace })(PigeonMap);
+export default connect(mapStateToProps, { showModal, navigateToSelectedPlace, fetchSavedPlace })(PigeonMap);
