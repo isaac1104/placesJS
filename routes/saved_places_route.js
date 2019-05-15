@@ -4,12 +4,18 @@ const requireAuth = require('../middlewares/requireAuth');
 
 module.exports = app => {
   app.get('/api/saved_places', requireAuth, async (req, res) => {
-    const savedPlace = await SavedPlace.find({ _user: req.user.id });
-    res.status(200).send(savedPlace);
+    const savedPlaces = await SavedPlace.find({ _user: req.user.id });
+    res.status(200).send(savedPlaces);
   });
 
   app.get('/api/saved_places/:uuid', requireAuth, async (req, res) => {
-    console.log(req.params.uuid);
+    const { uuid } = req.params;
+    try {
+      const savedPlace = await SavedPlace.findOne({ uuid });
+      res.status(200).send(savedPlace);
+    } catch (e) {
+      res.status(400).send(e);
+    }
   });
 
   app.post('/api/saved_places', requireAuth, async (req, res) => {

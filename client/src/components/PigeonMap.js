@@ -64,6 +64,7 @@ class PigeonMap extends Component {
   }
 
   render() {
+    console.log(this.props.savedPlace);
     return (
       <>
         {this.renderMap()}
@@ -72,8 +73,9 @@ class PigeonMap extends Component {
   }
 }
 
-const mapStateToProps = ({ savedPlaces, location, modalVisibility }) => {
+const mapStateToProps = ({ savedPlace, savedPlaces, location, modalVisibility }) => {
   return {
+    savedPlace,
     savedPlaces,
     location,
     modalVisibility
