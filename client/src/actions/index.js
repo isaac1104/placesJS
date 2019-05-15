@@ -23,6 +23,17 @@ export const fetchSavedPlaces = () => async dispatch => {
   }
 };
 
+export const fetchSavedPlace = uuid => async dispatch => {
+  dispatch({ type: types.FETCH_SAVED_PLACE_REQUEST, payload: true });
+  try {
+    const request = await axios.get(`/api/saved_places/${uuid}`);
+    const { data } = request;
+    dispatch({ type: types.FETCH_SAVED_PLACE_SUCCESS, payload: data });
+  } catch (e) {
+    dispatch({ type: types.FETCH_SAVED_PLACE_FAIL, payload: e });
+  }
+};
+
 export const saveSelectedPlace = value => async dispatch => {
   try {
     const request = await axios.post('/api/saved_places', value);
