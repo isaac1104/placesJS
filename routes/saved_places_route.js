@@ -8,6 +8,10 @@ module.exports = app => {
     res.status(200).send(savedPlace);
   });
 
+  app.get('/api/saved_places/:uuid', requireAuth, async (req, res) => {
+    console.log(req.params.uuid);
+  });
+
   app.post('/api/saved_places', requireAuth, async (req, res) => {
     const { title, description, latitude, longitude, uuid } = req.body;
     const currentPlace = await SavedPlace.find({ latitude, latitude });
