@@ -23,6 +23,10 @@ body {
   color: #ffffff;
 }
 
+.ant-drawer-close {
+  color: #ffffff;
+}
+
 .ant-popover-inner {
   background-color: #1f2124;
 }

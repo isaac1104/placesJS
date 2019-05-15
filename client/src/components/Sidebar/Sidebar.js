@@ -52,7 +52,6 @@ class Sidebar extends Component {
       <Drawer
         title='My saved places'
         placement='left'
-        closable={false}
         onClose={() => hideSidebar()}
         visible={visible}
       >
