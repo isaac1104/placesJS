@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Modal, Typography, Spin, Icon, Button, message } from 'antd';
+import { Modal, Typography, Spin, Icon, Button, Popconfirm, message } from 'antd';
 import { deleteSelectedPlace, hideSelectedPlaceModal } from '../../actions';
 import classes from './SelectedPlaceModal.module.css';
 
@@ -27,19 +27,29 @@ class SelectedPlaceModal extends Component {
         onOk={isFetching ? hideSelectedPlaceModal : null}
         onCancel={hideSelectedPlaceModal}
         footer={[
-          <Button
-            disabled={isFetching ? true : false}
-            loading={isDeleting ? true : false}
-            key='delete'
-            type='danger'
-            onClick={async () => {
+          <Popconfirm
+            title='Are you sure you want to delete this place?'
+            icon={<Icon type='exclamation' />}
+            okType='danger'
+            okText='Yes'
+            cancelText='No'
+            placement='bottom'
+            trigger='click'
+            onConfirm={async () => {
               this.setState({ isDeleting: true });
               await deleteSelectedPlace(uuid, () => message.success('Place has been removed successfully'), hideSelectedPlaceModal);
               this.setState({ isDeleting: false });
             }}
           >
-            Delete
-          </Button>,
+            <Button
+              disabled={isFetching ? true : false}
+              loading={isDeleting ? true : false}
+              key='delete'
+              type='danger'
+            >
+              Delete
+            </Button>
+          </Popconfirm>,
           <Button
             disabled={isFetching ? true : false}
             key='ok'
