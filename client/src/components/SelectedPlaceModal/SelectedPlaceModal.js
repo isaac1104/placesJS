@@ -17,7 +17,7 @@ class SelectedPlaceModal extends Component {
         <Modal
           centered
           destroyOnClose
-          title={title || ''}
+          title='Fetching Info...'
           visible={selectedPlaceModalVisible}
           onCancel={hideSelectedPlaceModal}
           okButtonProps={{ disabled: true }}
@@ -41,7 +41,7 @@ class SelectedPlaceModal extends Component {
       <Modal
         centered
         destroyOnClose
-        title={title || ''}
+        title={title}
         visible={selectedPlaceModalVisible}
         onOk={hideSelectedPlaceModal}
         onCancel={hideSelectedPlaceModal}
