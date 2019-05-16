@@ -9,6 +9,11 @@ class SelectedPlaceModal extends Component {
     isDeleting: false
   };
 
+  handleModalClose = () => {
+    this.setState({ isDeleting: false });
+    this.props.hideSelectedPlaceModal();
+  }
+
   renderSelectedPlaceModal() {
     const { isDeleting } = this.state;
     const {
@@ -32,10 +37,9 @@ class SelectedPlaceModal extends Component {
             loading={isDeleting ? true : false}
             key='delete'
             type='danger'
-            onClick={async () => {
+            onClick={() => {
               this.setState({ isDeleting: true });
-              await deleteSelectedPlace(uuid, () => message.success('Place has been removed successfully'), hideSelectedPlaceModal);
-              this.setState({ isDeleting: false });
+              deleteSelectedPlace(uuid, this.handleModalClose, () => message.success('Place has been removed successfully'));
             }}
           >
             Delete
