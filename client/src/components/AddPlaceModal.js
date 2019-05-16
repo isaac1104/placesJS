@@ -66,14 +66,14 @@ class AddPlaceModal extends Component {
   }
 
   render() {
-    const { modalVisibility: { visible }, selectedLocation, handleSubmit } = this.props;
+    const { modalVisibility: { addPlaceModalVisible }, selectedLocation, handleSubmit } = this.props;
     return (
       <Modal
         centered
         destroyOnClose
         title='Would you like to save this location?'
         okText='Save'
-        visible={visible}
+        visible={addPlaceModalVisible}
         onCancel={this.handleModalHide}
         confirmLoading={this.state.formSubmitting}
         onOk={handleSubmit(this.formSubmit)}

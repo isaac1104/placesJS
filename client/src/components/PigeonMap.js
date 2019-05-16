@@ -36,8 +36,8 @@ class PigeonMap extends Component {
   }
 
   renderModal(location) {
-    const { visible } = this.props.modalVisibility;
-    if (visible) {
+    const { addPlaceModalVisible } = this.props.modalVisibility;
+    if (addPlaceModalVisible) {
       return <AddPlaceModal selectedLocation={location} />;
     }
 
