@@ -56,7 +56,6 @@ class PigeonMap extends Component {
   }
 
   renderMap() {
-    const { selectedLocation } = this.state;
     const { location: { latitude, longitude }, showAddPlaceModal } = this.props;
     return (
       <Map
@@ -69,15 +68,16 @@ class PigeonMap extends Component {
         }}
       >
         {this.renderMarkers()}
-        {this.renderAddPlaceModal(selectedLocation)}
       </Map>
     );
   }
 
   render() {
+    const { selectedLocation } = this.state;
     return (
       <>
         {this.renderMap()}
+        {this.renderAddPlaceModal(selectedLocation)}
         {this.renderSelectedPlaceModal()}
       </>
     );

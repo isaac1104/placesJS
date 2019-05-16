@@ -5,20 +5,22 @@ import { hideSelectedPlaceModal } from '../actions';
 
 class SelectedPlaceModal extends Component {
   render() {
-    console.log(this.props.savedPlace);
-    const { modalVisibility: { selectedPlaceModalVisible }, hideSelectedPlaceModal } = this.props;
+    const {
+      savedPlace: { data: { latitude, longitude, title, description} },
+      modalVisibility: { selectedPlaceModalVisible },
+      hideSelectedPlaceModal
+    } = this.props;
     return (
       <Modal
         centered
         destroyOnClose
-        title='Title'
+        title={title}
         visible={selectedPlaceModalVisible}
         onOk={hideSelectedPlaceModal}
         onCancel={hideSelectedPlaceModal}
       >
-        <Typography>
-          latitude & longitude
-        </Typography>
+        <Typography>{`Latitude & Longitude: ${latitude}, ${longitude}`}</Typography>
+        <Typography>Description: {description || 'N/A'}</Typography>
       </Modal>
     );
   }
