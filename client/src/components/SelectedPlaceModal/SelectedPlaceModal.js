@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Modal, Typography, Spin, Icon } from 'antd';
-import { hideSelectedPlaceModal } from '../../actions';
+import { Modal, Typography, Spin, Icon, Button, message } from 'antd';
+import { deleteSelectedPlace, hideSelectedPlaceModal } from '../../actions';
 import classes from './SelectedPlaceModal.module.css';
 
 class SelectedPlaceModal extends Component {
+  state = {
+    isDeleting: false
+  };
+
   renderSelectedPlaceModal() {
+    const { isDeleting } = this.state;
     const {
-      savedPlace: { data: { latitude, longitude, title, description }, isFetching },
+      savedPlace: { data: { latitude, longitude, title, description, uuid }, isFetching },
       modalVisibility: { selectedPlaceModalVisible },
+      deleteSelectedPlace,
       hideSelectedPlaceModal
     } = this.props;
 
@@ -20,8 +26,14 @@ class SelectedPlaceModal extends Component {
           title='Fetching Info...'
           visible={selectedPlaceModalVisible}
           onCancel={hideSelectedPlaceModal}
-          okButtonProps={{ disabled: true }}
-          cancelButtonProps={{ disabled: true }}
+          footer={[
+            <Button key='delete' type='danger' disabled>
+              Delete
+            </Button>,
+            <Button key='ok' type='primary' disabled>
+              Ok
+            </Button>,
+          ]}
         >
           <div className={classes.ModalSpinContainer}>
             <Spin
@@ -45,6 +57,23 @@ class SelectedPlaceModal extends Component {
         visible={selectedPlaceModalVisible}
         onOk={hideSelectedPlaceModal}
         onCancel={hideSelectedPlaceModal}
+        footer={[
+          <Button
+            loading={isDeleting ? true : false}
+            key='delete'
+            type='danger'
+            onClick={async () => {
+              this.setState({ isDeleting: true });
+              await deleteSelectedPlace(uuid, () => message.success('Place has been removed successfully'), hideSelectedPlaceModal);
+              this.setState({ isDeleting: false });
+            }}
+          >
+            Delete
+          </Button>,
+          <Button key='ok' type='primary' onClick={hideSelectedPlaceModal}>
+            Ok
+          </Button>,
+        ]}
       >
         <Typography>{`Latitude & Longitude: ${latitude}, ${longitude}`}</Typography>
         <Typography>Description: {description || 'N/A'}</Typography>
@@ -68,4 +97,4 @@ const mapStateToProps = ({ modalVisibility, savedPlace }) => {
   };
 };
 
-export default connect(mapStateToProps, { hideSelectedPlaceModal })(SelectedPlaceModal);
+export default connect(mapStateToProps, { deleteSelectedPlace, hideSelectedPlaceModal })(SelectedPlaceModal);
