@@ -1,4 +1,4 @@
-import { SHOW_MODAL, HIDE_MODAL } from '../actions/types';
+import { SHOW_ADD_PLACE_MODAL, HIDE_ADD_PLACE_MODAL } from '../actions/types';
 
 const INITIAL_STATE = {
   visible: false
@@ -6,12 +6,12 @@ const INITIAL_STATE = {
 
 const modalVisibilityReducer = (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
-    case SHOW_MODAL:
+    case SHOW_ADD_PLACE_MODAL:
       return {
         ...state,
         visible: payload
       };
-    case HIDE_MODAL:
+    case HIDE_ADD_PLACE_MODAL:
       return {
         ...state,
         visible: payload

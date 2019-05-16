@@ -67,12 +67,12 @@ export const navigateToSelectedPlace = (location, callback) => dispatch => {
 };
 
 export const showModal = () => ({
-  type: types.SHOW_MODAL,
+  type: types.SHOW_ADD_PLACE_MODAL,
   payload: true
 });
 
 export const hideModal = () => ({
-  type: types.HIDE_MODAL,
+  type: types.HIDE_ADD_PLACE_MODAL,
   payload: false
 });
 
