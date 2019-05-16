@@ -84,9 +84,8 @@ class PigeonMap extends Component {
   }
 }
 
-const mapStateToProps = ({ savedPlace, savedPlaces, location, modalVisibility }) => {
+const mapStateToProps = ({ savedPlaces, location, modalVisibility }) => {
   return {
-    savedPlace,
     savedPlaces,
     location,
     modalVisibility
