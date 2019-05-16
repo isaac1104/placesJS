@@ -48,10 +48,10 @@ class PigeonMap extends Component {
     return null;
   }
 
-  renderSelectedPlaceModal(uuid) {
+  renderSelectedPlaceModal() {
     const { selectedPlaceModalVisible } = this.props.modalVisibility;
     if (selectedPlaceModalVisible) {
-      return <SelectedPlaceModal uuid={uuid} />;
+      return <SelectedPlaceModal />;
     }
   }
 
