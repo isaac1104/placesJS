@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal, Typography, Spin, Icon } from 'antd';
-import { hideSelectedPlaceModal } from '../actions';
+import { hideSelectedPlaceModal } from '../../actions';
+import classes from './SelectedPlaceModal.module.css';
 
 class SelectedPlaceModal extends Component {
   renderSelectedPlaceModal() {
@@ -18,10 +19,20 @@ class SelectedPlaceModal extends Component {
           destroyOnClose
           title={title || ''}
           visible={selectedPlaceModalVisible}
+          onCancel={hideSelectedPlaceModal}
           okButtonProps={{ disabled: true }}
           cancelButtonProps={{ disabled: true }}
         >
-          <Spin indicator={<Icon type='loading' />} />
+          <div className={classes.ModalSpinContainer}>
+            <Spin
+              indicator={
+                <Icon
+                  type='loading'
+                  className={classes.ModalSpinner}
+                />
+              }
+            />
+          </div>
         </Modal>
       );
     }

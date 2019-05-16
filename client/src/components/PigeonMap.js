@@ -4,7 +4,7 @@ import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
 import { showAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace, showSelectedPlaceModal } from '../actions';
 import AddPlaceModal from './AddPlaceModal';
-import SelectedPlaceModal from './SelectedPlaceModal';
+import SelectedPlaceModal from './SelectedPlaceModal/SelectedPlaceModal';
 
 class PigeonMap extends Component {
   state = {
