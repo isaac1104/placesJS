@@ -18,47 +18,17 @@ class SelectedPlaceModal extends Component {
       hideSelectedPlaceModal
     } = this.props;
 
-    if (isFetching) {
-      return (
-        <Modal
-          centered
-          destroyOnClose
-          title='Fetching Info...'
-          visible={selectedPlaceModalVisible}
-          onCancel={hideSelectedPlaceModal}
-          footer={[
-            <Button key='delete' type='danger' disabled>
-              Delete
-            </Button>,
-            <Button key='ok' type='primary' disabled>
-              Ok
-            </Button>,
-          ]}
-        >
-          <div className={classes.ModalSpinContainer}>
-            <Spin
-              indicator={
-                <Icon
-                  type='loading'
-                  className={classes.ModalSpinner}
-                />
-              }
-            />
-          </div>
-        </Modal>
-      );
-    }
-
     return (
       <Modal
         centered
         destroyOnClose
-        title={title}
+        title={isFetching ? 'Fetching info...' : title}
         visible={selectedPlaceModalVisible}
-        onOk={hideSelectedPlaceModal}
+        onOk={isFetching ? hideSelectedPlaceModal : null}
         onCancel={hideSelectedPlaceModal}
         footer={[
           <Button
+            disabled={isFetching ? true : false}
             loading={isDeleting ? true : false}
             key='delete'
             type='danger'
@@ -70,13 +40,33 @@ class SelectedPlaceModal extends Component {
           >
             Delete
           </Button>,
-          <Button key='ok' type='primary' onClick={hideSelectedPlaceModal}>
+          <Button
+            disabled={isFetching ? true : false}
+            key='ok'
+            type='primary'
+            onClick={hideSelectedPlaceModal}
+          >
             Ok
           </Button>,
         ]}
       >
-        <Typography>{`Latitude & Longitude: ${latitude}, ${longitude}`}</Typography>
-        <Typography>Description: {description || 'N/A'}</Typography>
+        {isFetching ? (
+          <div className={classes.ModalSpinContainer}>
+            <Spin
+              indicator={
+                <Icon
+                  type='loading'
+                  className={classes.ModalSpinner}
+                />
+              }
+            />
+          </div>
+        ) : (
+          <>
+            <Typography>{`Latitude & Longitude: ${latitude}, ${longitude}`}</Typography>
+            <Typography>Description: {description || 'N/A'}</Typography>
+          </>
+        )}
       </Modal>
     );
   }
