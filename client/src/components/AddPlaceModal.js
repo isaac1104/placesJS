@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Modal, Typography, Input, Form } from 'antd';
 import uuidv4 from 'uuid/v4';
-import { hideModal, saveSelectedPlace } from '../actions';
+import { hideAddPlaceModal, saveSelectedPlace } from '../actions';
 
 const { TextArea } = Input;
 
@@ -15,7 +15,7 @@ class AddPlaceModal extends Component {
   };
 
   formSubmit = async value => {
-    const { selectedLocation, saveSelectedPlace, reset, hideModal } = this.props;
+    const { selectedLocation, saveSelectedPlace, reset, hideAddPlaceModal } = this.props;
     const [ latitude, longitude ] = selectedLocation;
     const data = {
       ...value,
@@ -26,7 +26,7 @@ class AddPlaceModal extends Component {
     this.setState({ formSubmitting: true });
     await saveSelectedPlace(data);
     await this.setState({ formSubmitting: false });
-    hideModal();
+    hideAddPlaceModal();
     reset();
   };
 
@@ -62,7 +62,7 @@ class AddPlaceModal extends Component {
 
   handleModalHide = () => {
     this.props.reset();
-    this.props.hideModal();
+    this.props.hideAddPlaceModal();
   }
 
   render() {
@@ -113,5 +113,5 @@ const validate = value => {
 export default compose(
   withRouter,
   reduxForm({ validate, form: 'place', destroyOnUnmount: true }),
-  connect(mapStateToProps, { hideModal, saveSelectedPlace })
+  connect(mapStateToProps, { hideAddPlaceModal, saveSelectedPlace })
 )(AddPlaceModal);

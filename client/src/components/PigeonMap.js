@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
-import { showModal, navigateToSelectedPlace, fetchSavedPlace } from '../actions';
+import { showAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace } from '../actions';
 import AddPlaceModal from './AddPlaceModal';
 
 class PigeonMap extends Component {
@@ -54,7 +54,7 @@ class PigeonMap extends Component {
         center={[latitude, longitude]}
         onClick={async ({ event, latLng, pixel }) => {
           await this.setState({ selectedLocation: latLng });
-          this.props.showModal();
+          this.props.showAddPlaceModal();
         }}
       >
         {this.renderMarkers()}
@@ -82,4 +82,4 @@ const mapStateToProps = ({ savedPlace, savedPlaces, location, modalVisibility })
   };
 };
 
-export default connect(mapStateToProps, { showModal, navigateToSelectedPlace, fetchSavedPlace })(PigeonMap);
+export default connect(mapStateToProps, { showAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace })(PigeonMap);

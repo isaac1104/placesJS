@@ -66,13 +66,23 @@ export const navigateToSelectedPlace = (location, callback) => dispatch => {
   }
 };
 
-export const showModal = () => ({
+export const showAddPlaceModal = () => ({
   type: types.SHOW_ADD_PLACE_MODAL,
   payload: true
 });
 
-export const hideModal = () => ({
+export const hideAddPlaceModal = () => ({
   type: types.HIDE_ADD_PLACE_MODAL,
+  payload: false
+});
+
+export const showSelectedlaceModal = () => ({
+  type: types.SHOW_SELECTED_PLACE_MODAL,
+  payload: true
+});
+
+export const hideSelectedlaceModal = () => ({
+  type: types.HIDE_SELECTED_PLACE_MODAL,
   payload: false
 });
 
