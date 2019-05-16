@@ -1,20 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Modal, Typography } from 'antd';
+import { Modal, Typography, Spin, Icon } from 'antd';
 import { hideSelectedPlaceModal } from '../actions';
 
 class SelectedPlaceModal extends Component {
-  render() {
+  renderSelectedPlaceModal() {
     const {
-      savedPlace: { data: { latitude, longitude, title, description} },
+      savedPlace: { data: { latitude, longitude, title, description }, isFetching },
       modalVisibility: { selectedPlaceModalVisible },
       hideSelectedPlaceModal
     } = this.props;
+
+    if (isFetching) {
+      return (
+        <Modal
+          centered
+          destroyOnClose
+          title={title || ''}
+          visible={selectedPlaceModalVisible}
+          okButtonProps={{ disabled: true }}
+          cancelButtonProps={{ disabled: true }}
+        >
+          <Spin indicator={<Icon type='loading' />} />
+        </Modal>
+      );
+    }
+
     return (
       <Modal
         centered
         destroyOnClose
-        title={title}
+        title={title || ''}
         visible={selectedPlaceModalVisible}
         onOk={hideSelectedPlaceModal}
         onCancel={hideSelectedPlaceModal}
@@ -22,6 +38,14 @@ class SelectedPlaceModal extends Component {
         <Typography>{`Latitude & Longitude: ${latitude}, ${longitude}`}</Typography>
         <Typography>Description: {description || 'N/A'}</Typography>
       </Modal>
+    );
+  }
+
+  render() {
+    return (
+      <>
+        {this.renderSelectedPlaceModal()}
+      </>
     );
   }
 }

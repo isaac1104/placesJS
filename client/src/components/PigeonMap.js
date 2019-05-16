@@ -30,8 +30,8 @@ class PigeonMap extends Component {
       <Marker
         key={uuid}
         anchor={[latitude, longitude]}
-        onClick={async () => {
-          await fetchSavedPlace(uuid);
+        onClick={() => {
+          fetchSavedPlace(uuid);
           showSelectedPlaceModal();
         }}
         payload={1}
