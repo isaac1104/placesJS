@@ -20,7 +20,7 @@ class SelectedPlaceModal extends Component {
 
     return (
       <Modal
-        centered
+        centered 
         destroyOnClose
         title={isFetching ? 'Fetching info...' : title}
         visible={selectedPlaceModalVisible}
