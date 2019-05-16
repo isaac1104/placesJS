@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
-import { showAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace } from '../actions';
+import { showAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace, showSelectedPlaceModal } from '../actions';
 import AddPlaceModal from './AddPlaceModal';
+import SelectedPlaceModal from './SelectedPlaceModal';
 
 class PigeonMap extends Component {
   state = {
@@ -24,24 +25,34 @@ class PigeonMap extends Component {
   }
 
   renderMarkers() {
-    const { savedPlaces : { data }, fetchSavedPlace } = this.props;
+    const { savedPlaces : { data }, fetchSavedPlace, showSelectedPlaceModal } = this.props;
     return data.map(({ uuid, title, description, latitude, longitude }) => (
       <Marker
         key={uuid}
         anchor={[latitude, longitude]}
-        onClick={() => fetchSavedPlace(uuid)}
+        onClick={async () => {
+          await fetchSavedPlace(uuid);
+          showSelectedPlaceModal();
+        }}
         payload={1}
       />
     ));
   }
 
-  renderModal(location) {
+  renderAddPlaceModal(location) {
     const { addPlaceModalVisible } = this.props.modalVisibility;
     if (addPlaceModalVisible) {
       return <AddPlaceModal selectedLocation={location} />;
     }
 
     return null;
+  }
+
+  renderSelectedPlaceModal(uuid) {
+    const { selectedPlaceModalVisible } = this.props.modalVisibility;
+    if (selectedPlaceModalVisible) {
+      return <SelectedPlaceModal uuid={uuid} />;
+    }
   }
 
   renderMap() {
@@ -58,16 +69,16 @@ class PigeonMap extends Component {
         }}
       >
         {this.renderMarkers()}
-        {this.renderModal(selectedLocation)}
+        {this.renderAddPlaceModal(selectedLocation)}
       </Map>
     );
   }
 
   render() {
-    console.log(this.props.savedPlace);
     return (
       <>
         {this.renderMap()}
+        {this.renderSelectedPlaceModal()}
       </>
     );
   }
@@ -82,4 +93,4 @@ const mapStateToProps = ({ savedPlace, savedPlaces, location, modalVisibility })
   };
 };
 
-export default connect(mapStateToProps, { showAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace })(PigeonMap);
+export default connect(mapStateToProps, { showAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace, showSelectedPlaceModal })(PigeonMap);

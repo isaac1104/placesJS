@@ -76,12 +76,12 @@ export const hideAddPlaceModal = () => ({
   payload: false
 });
 
-export const showSelectedlaceModal = () => ({
+export const showSelectedPlaceModal = () => ({
   type: types.SHOW_SELECTED_PLACE_MODAL,
   payload: true
 });
 
-export const hideSelectedlaceModal = () => ({
+export const hideSelectedPlaceModal = () => ({
   type: types.HIDE_SELECTED_PLACE_MODAL,
   payload: false
 });
