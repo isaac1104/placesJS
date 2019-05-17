@@ -9,9 +9,7 @@ const Landing = () => (
   <div className={classes.LandingContainer}>
     <div>
       <Fade top>
-        <Title className={classes.LandingTitle}>
-          <span role='img' aria-label='earth-emoji'>🌎</span> Welcome to PlacesJS
-        </Title>
+        <Title className={classes.LandingTitle}><span role='img' aria-label='earth-emoji'>🌎</span> PlacesJS</Title>
       </Fade>
       <Fade bottom>
         <Button
