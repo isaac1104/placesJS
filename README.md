@@ -1,117 +1,40 @@
-![react logo](https://cdn.iconscout.com/icon/free/png-256/react-2-458175.png) 
+# 🌎 PlacesJS
 
-# Create-React-Express Boilerplate
+## About This App
 
-## About This Boilerplate
+PlacesJS is a web app that lets you move around the world on a map, select a place, and save that place for access.
 
-Build your React app using Node and Express with this boilerplate. This boilerplate comes with most of the popular NPM packages, such as `redux`, `react-router-dom`, `axios` and many more out of the box! This boilerplate can effortlessly connect your app to `Mongodb` database and also takes care of authenticating users with `Google OAuth`. (signed-in users' information will be saved into your database)
+## Screenshots
 
-## 💻 Tech Stack
+Once you are logged in, you can see the entire map right in front of your eyes. 
 
-Here is the list of packages / techs used in the boilerplate.
+![screenshot-1](https://user-images.githubusercontent.com/28583016/57898770-62873880-7895-11e9-86d8-9f30415a9e98.png)
 
-Full list of dependencies can be found inside `client/package.json` file.
+Click anywhere on the map to saved that place. You can give it a title and a brief description about the location.
 
-```
-Frontend
+![screenshot-2](https://user-images.githubusercontent.com/28583016/57898771-62873880-7895-11e9-95b2-7b24dd8b9b81.png)
 
-* React
-* Redux
-* React-Router
-* Redux-Form
+Access all of your saved places later.
 
-Backend
+![screenshot-3](https://user-images.githubusercontent.com/28583016/57898772-631fcf00-7895-11e9-918b-63852afe3591.png)
 
-* Node
-* Express
-* Mongodb
-* Passport.js 
+Delete any places that you don't need anymore.
 
-```
+![screenshot-4](https://user-images.githubusercontent.com/28583016/57898773-631fcf00-7895-11e9-8845-fe57e0696e68.png)
 
-## 💻 Starting the app locally
+## To-Do
 
-Start by installing front and backend dependencies. While in this directory, run the following commands:
+- [ ] Users can search for a place using City, Country name
 
-```
-npm install
-cd client
-npm install
-cd ..
-```
+## To use the app
 
-Inside the config folder on the root directory, create a file named `dev.js` with key/value pairs as below.
+1. Click the [link](https://placesjs.herokuapp.com/) to go to the website
+2. Sign in using your Spotify account
+3. Enjoy the app!
 
-```
-module.exports = {
-  googleClientID: 'YOUR_GOOGLE_CLIENT_ID',
-  googleClientSecret: 'YOUR_GOOGLE_CLIENT_SECRET', 
-  mongodbURI: 'YOUR_MONGODB_URI', 
-  cookieKey: 'RANDOM_STRING',
-};
-```
-
-After all the setup, on the root directory, run this command to start the app.
-
-``` npm run dev ```
-
-Your app should automatically open on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
-
-## 🌎 Deployment (Heroku)
-
-### Create a Git Repo
-
-Once you're ready to deploy, start by making sure your project is a git repository. If so, proceed to the next section, otherwise run the following commands in your terminal:
-
-```
-git init
-git add .
-git commit -m "Initial commit"
-```
-
-### Heroku
-
-Make sure that you have a Heroku app created for this project. If so, proceed to the next section, otherwise run the following command in your terminal:
-
-```
-heroku create
-```
-
-Optionally add an argument for your application's name after `create`, e.g.
-
-```
-heroku myawesomeapp
-```
-
-### Deploying
-
-After confirming that you have an up to date git repository and a Heroku app created, complete the following:
-
-1. Build the React app for production by running the following command:
-
-```
-npm run build
-```
-
-2. Add and commit all changes to git
-
-```
-git add -A
-git commit -m "commit message:
-```
-3. Push to Heroku
-
-```
-git push heroku master
-```
-4. Make sure to add `Config Vars` for your Heroku app on dashboard under settings
-* The key/value pairs must match the content inside your `dev.js` file.
-
-```
-GOOGLE_CLIENT_ID: 'YOUR_GOOGLE_CLIENT_ID'
-GOOGLE_CLIENT_SECRET: 'YOUR_GOOGLE_CLIENT_SECRET'
-MONGODB_URI: 'YOUR_MONGODB_URI'
-COOKIE_KEY: 'YOUR_COOKIE_KEY'
-```
-
-If all previous steps were followed correctly, your application should be deployed to Heroku!
+## Tech Stack
+1. React
+2. Redux
+3. MongoDB
+4. Node
+5. Express
