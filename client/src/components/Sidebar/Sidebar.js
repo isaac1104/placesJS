@@ -20,7 +20,7 @@ class Sidebar extends Component {
           <Icon type='global' className={classes.GlobeIcon} />
           <Typography
             className={classes.SavedPlacesText}
-            onClick={() => navigateToSelectedPlace([latitude, longitude], hideSidebar)}
+            onClick={() => navigateToSelectedPlace([latitude, longitude])}
           >
             {title}
           </Typography>
@@ -52,8 +52,9 @@ class Sidebar extends Component {
       <Drawer
         title='My saved places'
         placement='left'
-        onClose={() => hideSidebar()}
+        mask={false}
         visible={visible}
+        onClose={() => hideSidebar()}
       >
         {this.renderSavedPlaces()}
       </Drawer>

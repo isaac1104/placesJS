@@ -59,11 +59,8 @@ export const deleteSelectedPlace = (uuid, hideUI, displayMessage) => async dispa
   }
 };
 
-export const navigateToSelectedPlace = (location, callback) => dispatch => {
+export const navigateToSelectedPlace = location => dispatch => {
   dispatch({ type: types.NAVIGATE_TO_SELECTED_PLACE, payload: location });
-  if (callback) {
-    callback();
-  }
 };
 
 export const showAddPlaceModal = () => ({
