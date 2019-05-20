@@ -33,9 +33,11 @@ class SelectedPlaceModal extends Component {
         onCancel={hideSelectedPlaceModal}
         footer={[
           <Button
+            className={classes.DeleteButton}
             disabled={isFetching ? true : false}
             loading={isDeleting ? true : false}
             key='delete'
+            icon='delete'
             type='danger'
             onClick={() => {
               this.setState({ isDeleting: true });
@@ -46,7 +48,15 @@ class SelectedPlaceModal extends Component {
           </Button>,
           <Button
             disabled={isFetching ? true : false}
+            key='edit'
+            icon='edit'
+          >
+            Edit
+          </Button>,
+          <Button
+            disabled={isFetching ? true : false}
             key='ok'
+            icon='check'
             type='primary'
             onClick={hideSelectedPlaceModal}
           >

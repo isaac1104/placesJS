@@ -7,3 +7,7 @@
 .ModalSpinner {
   font-size: 3em;
 }
+
+.DeleteButton {
+  float: left;
+}
