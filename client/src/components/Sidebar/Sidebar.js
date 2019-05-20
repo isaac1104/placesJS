@@ -7,6 +7,17 @@ import classes from './Sidebar.module.css';
 class Sidebar extends Component {
   componentDidMount() {
     this.props.fetchSavedPlaces();
+    document.addEventListener('keydown', this.handleEscKey, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleEscKey, false);
+  }
+
+  handleEscKey = event => {
+    if (event.keyCode === 27) {
+      this.props.hideSidebar();
+    }
   }
 
   renderSavedPlaces() {
