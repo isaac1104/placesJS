@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal, Typography, Spin, Icon, Button, message, Popconfirm } from 'antd';
-import { deleteSelectedPlace, hideSelectedPlaceModal } from '../../actions';
+import { deleteSelectedPlace, toggleSelectedPlaceModal } from '../../actions';
 import classes from './SelectedPlaceModal.module.css';
 
 class SelectedPlaceModal extends Component {
@@ -11,7 +11,7 @@ class SelectedPlaceModal extends Component {
 
   handleModalClose = () => {
     this.setState({ isDeleting: false });
-    this.props.hideSelectedPlaceModal();
+    this.props.toggleSelectedPlaceModal();
   }
 
   renderSelectedPlaceModal() {
@@ -20,7 +20,7 @@ class SelectedPlaceModal extends Component {
       savedPlace: { data: { latitude, longitude, title, description, uuid }, isFetching },
       modalVisibility: { selectedPlaceModalVisible },
       deleteSelectedPlace,
-      hideSelectedPlaceModal
+      toggleSelectedPlaceModal
     } = this.props;
 
     return (
@@ -29,8 +29,8 @@ class SelectedPlaceModal extends Component {
         destroyOnClose
         title={isFetching ? 'Fetching info...' : title}
         visible={selectedPlaceModalVisible}
-        onOk={isFetching ? hideSelectedPlaceModal : null}
-        onCancel={hideSelectedPlaceModal}
+        onOk={isFetching ? toggleSelectedPlaceModal : null}
+        onCancel={toggleSelectedPlaceModal}
         footer={[
           <Popconfirm
             title='Are you sure you want to delete this place?'
@@ -60,7 +60,7 @@ class SelectedPlaceModal extends Component {
             key='ok'
             icon='check'
             type='primary'
-            onClick={hideSelectedPlaceModal}
+            onClick={toggleSelectedPlaceModal}
           >
             Ok
           </Button>,
@@ -103,4 +103,4 @@ const mapStateToProps = ({ modalVisibility, savedPlace }) => {
   };
 };
 
-export default connect(mapStateToProps, { deleteSelectedPlace, hideSelectedPlaceModal })(SelectedPlaceModal);
+export default connect(mapStateToProps, { deleteSelectedPlace, toggleSelectedPlaceModal })(SelectedPlaceModal);

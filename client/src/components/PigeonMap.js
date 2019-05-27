@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
-import { showAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace, showSelectedPlaceModal } from '../actions';
+import { showAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace, toggleSelectedPlaceModal } from '../actions';
 import AddPlaceModal from './AddPlaceModal';
 import SelectedPlaceModal from './SelectedPlaceModal/SelectedPlaceModal';
 
@@ -25,14 +25,14 @@ class PigeonMap extends Component {
   }
 
   renderMarkers() {
-    const { savedPlaces : { data }, fetchSavedPlace, showSelectedPlaceModal } = this.props;
+    const { savedPlaces : { data }, fetchSavedPlace, toggleSelectedPlaceModal } = this.props;
     return data.map(({ uuid, title, description, latitude, longitude }) => (
       <Marker
         key={uuid}
         anchor={[latitude, longitude]}
         onClick={() => {
           fetchSavedPlace(uuid);
-          showSelectedPlaceModal();
+          toggleSelectedPlaceModal();
         }}
         payload={1}
       />
@@ -92,4 +92,4 @@ const mapStateToProps = ({ savedPlaces, location, modalVisibility }) => {
   };
 };
 
-export default connect(mapStateToProps, { showAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace, showSelectedPlaceModal })(PigeonMap);
+export default connect(mapStateToProps, { showAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace, toggleSelectedPlaceModal })(PigeonMap);

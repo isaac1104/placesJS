@@ -73,16 +73,10 @@ export const hideAddPlaceModal = () => ({
   payload: false
 });
 
-export const showSelectedPlaceModal = () => ({
-  type: types.SHOW_SELECTED_PLACE_MODAL,
-  payload: true
-});
-
-export const hideSelectedPlaceModal = () => ({
-  type: types.HIDE_SELECTED_PLACE_MODAL,
-  payload: false
-});
-
 export const toggleSidebar = () => ({
   type: types.TOGGLE_SIDEBAR
+});
+
+export const toggleSelectedPlaceModal = () => ({
+  type: types.TOGGLE_SELECTED_PLACE_MODAL
 });
