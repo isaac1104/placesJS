@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Avatar, Button, Icon, Layout, Menu, Typography, Popover } from 'antd';
 import { connect } from 'react-redux';
-import { showSidebar } from '../../actions';
+import { toggleSidebar } from '../../actions';
 import Sidebar from '../Sidebar/Sidebar';
 import classes from './Navbar.module.css';
 
@@ -13,14 +13,14 @@ class Navbar extends Component {
   };
 
   renderNavbar() {
-    const { currentUser: { data }, showSidebar } = this.props;
+    const { currentUser: { data }, toggleSidebar } = this.props;
 
     if (data) {
       return (
         <Header className={classes.Navbar}>
           <Icon
             className={classes.MenuIcon}
-            onClick={() => showSidebar()}
+            onClick={() => toggleSidebar()}
             type='menu-unfold'
           />
           <Menu
@@ -80,4 +80,4 @@ const mapStateToProps = ({ currentUser }) => {
   };
 };
 
-export default connect(mapStateToProps, { showSidebar })(Navbar);
+export default connect(mapStateToProps, { toggleSidebar })(Navbar);

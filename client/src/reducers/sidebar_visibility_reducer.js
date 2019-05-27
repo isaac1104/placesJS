@@ -1,20 +1,15 @@
-import { SHOW_SIDEBAR, HIDE_SIDEBAR } from '../actions/types';
+import { TOGGLE_SIDEBAR } from '../actions/types';
 
 const INITIAL_STATE = {
   visible: false
 };
 
-const sidebarVisibilityReducer = (state = INITIAL_STATE, { type, payload }) => {
+const sidebarVisibilityReducer = (state = INITIAL_STATE, { type }) => {
   switch (type) {
-    case SHOW_SIDEBAR:
+    case TOGGLE_SIDEBAR:
       return {
         ...state,
-        visible: payload
-      };
-    case HIDE_SIDEBAR:
-      return {
-        ...state,
-        visible: payload
+        visible: !state.visible
       };
     default:
       return state;

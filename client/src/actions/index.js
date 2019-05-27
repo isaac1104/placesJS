@@ -83,12 +83,6 @@ export const hideSelectedPlaceModal = () => ({
   payload: false
 });
 
-export const showSidebar = () => ({
-  type: types.SHOW_SIDEBAR,
-  payload: true
-});
-
-export const hideSidebar = () => ({
-  type: types.HIDE_SIDEBAR,
-  payload: false
+export const toggleSidebar = () => ({
+  type: types.TOGGLE_SIDEBAR
 });

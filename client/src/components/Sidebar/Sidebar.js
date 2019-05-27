@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Drawer, List, Typography, Icon, Popconfirm, message } from 'antd';
-import { fetchSavedPlaces, hideSidebar, navigateToSelectedPlace, deleteSelectedPlace } from '../../actions'
+import { fetchSavedPlaces, toggleSidebar, navigateToSelectedPlace, deleteSelectedPlace } from '../../actions'
 import classes from './Sidebar.module.css';
 
 class Sidebar extends Component {
@@ -16,12 +16,12 @@ class Sidebar extends Component {
 
   handleEscKey = event => {
     if (event.keyCode === 27) {
-      this.props.hideSidebar();
+      this.props.toggleSidebar();
     }
   }
 
   renderSavedPlaces() {
-    const { savedPlaces: { data }, navigateToSelectedPlace, hideSidebar, deleteSelectedPlace } = this.props;
+    const { savedPlaces: { data }, navigateToSelectedPlace, toggleSidebar, deleteSelectedPlace } = this.props;
     if (data) {
       return data.map(({ uuid, title, description, latitude, longitude }) => (
         <List.Item
@@ -43,7 +43,7 @@ class Sidebar extends Component {
             cancelText='No'
             placement='right'
             trigger='click'
-            onConfirm={() => deleteSelectedPlace(uuid, () => message.success('Place has been removed successfully'), hideSidebar)}
+            onConfirm={() => deleteSelectedPlace(uuid, () => message.success('Place has been removed successfully'), toggleSidebar)}
           >
             <Icon
               type='delete'
@@ -58,14 +58,14 @@ class Sidebar extends Component {
   }
 
   render() {
-    const { sidebarVisibility: { visible }, hideSidebar } = this.props;
+    const { sidebarVisibility: { visible }, toggleSidebar } = this.props;
     return (
       <Drawer
         title='My saved places'
         placement='left'
         mask={false}
         visible={visible}
-        onClose={() => hideSidebar()}
+        onClose={() => toggleSidebar()}
       >
         {this.renderSavedPlaces()}
       </Drawer>
@@ -80,4 +80,4 @@ const mapStateToProps = ({ savedPlaces, sidebarVisibility }) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchSavedPlaces, hideSidebar, navigateToSelectedPlace, deleteSelectedPlace })(Sidebar);
+export default connect(mapStateToProps, { fetchSavedPlaces, toggleSidebar, navigateToSelectedPlace, deleteSelectedPlace })(Sidebar);
