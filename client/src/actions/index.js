@@ -63,20 +63,14 @@ export const navigateToSelectedPlace = location => dispatch => {
   dispatch({ type: types.NAVIGATE_TO_SELECTED_PLACE, payload: location });
 };
 
-export const showAddPlaceModal = () => ({
-  type: types.SHOW_ADD_PLACE_MODAL,
-  payload: true
-});
-
-export const hideAddPlaceModal = () => ({
-  type: types.HIDE_ADD_PLACE_MODAL,
-  payload: false
-});
-
 export const toggleSidebar = () => ({
   type: types.TOGGLE_SIDEBAR
 });
 
 export const toggleSelectedPlaceModal = () => ({
   type: types.TOGGLE_SELECTED_PLACE_MODAL
+});
+
+export const toggleAddPlaceModal = () => ({
+  type: types.TOGGLE_ADD_PLACE_MODAL
 });

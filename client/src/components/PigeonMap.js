@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
-import { showAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace, toggleSelectedPlaceModal } from '../actions';
+import { toggleAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace, toggleSelectedPlaceModal } from '../actions';
 import AddPlaceModal from './AddPlaceModal';
 import SelectedPlaceModal from './SelectedPlaceModal/SelectedPlaceModal';
 
@@ -56,7 +56,7 @@ class PigeonMap extends Component {
   }
 
   renderMap() {
-    const { location: { latitude, longitude }, showAddPlaceModal } = this.props;
+    const { location: { latitude, longitude }, toggleAddPlaceModal } = this.props;
     return (
       <Map
         metaWheelZoom
@@ -64,7 +64,7 @@ class PigeonMap extends Component {
         center={[latitude, longitude]}
         onClick={async ({ event, latLng, pixel }) => {
           await this.setState({ selectedLocation: latLng });
-          showAddPlaceModal();
+          toggleAddPlaceModal();
         }}
       >
         {this.renderMarkers()}
@@ -92,4 +92,4 @@ const mapStateToProps = ({ savedPlaces, location, modalVisibility }) => {
   };
 };
 
-export default connect(mapStateToProps, { showAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace, toggleSelectedPlaceModal })(PigeonMap);
+export default connect(mapStateToProps, { toggleAddPlaceModal, navigateToSelectedPlace, fetchSavedPlace, toggleSelectedPlaceModal })(PigeonMap);

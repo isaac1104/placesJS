@@ -1,4 +1,4 @@
-import { SHOW_ADD_PLACE_MODAL, HIDE_ADD_PLACE_MODAL, TOGGLE_SELECTED_PLACE_MODAL } from '../actions/types';
+import { TOGGLE_ADD_PLACE_MODAL, TOGGLE_SELECTED_PLACE_MODAL } from '../actions/types';
 
 const INITIAL_STATE = {
   addPlaceModalVisible: false,
@@ -7,15 +7,10 @@ const INITIAL_STATE = {
 
 const modalVisibilityReducer = (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
-    case SHOW_ADD_PLACE_MODAL:
+    case TOGGLE_ADD_PLACE_MODAL:
       return {
         ...state,
-        addPlaceModalVisible: payload
-      };
-    case HIDE_ADD_PLACE_MODAL:
-      return {
-        ...state,
-        addPlaceModalVisible: payload
+        addPlaceModalVisible: !state.addPlaceModalVisible
       };
     case TOGGLE_SELECTED_PLACE_MODAL:
       return {
