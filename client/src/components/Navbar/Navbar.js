@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Avatar, Button, Icon, Layout, Menu, Typography, Popover } from 'antd';
 import { connect } from 'react-redux';
 import { toggleSidebar } from '../../actions';
+import SearchInput from '../SearchInput/SearchInput';
 import Sidebar from '../Sidebar/Sidebar';
 import classes from './Navbar.module.css';
 
@@ -27,6 +28,9 @@ class Navbar extends Component {
             className={classes.NavbarMenu}
             theme='dark'
           />
+          <div className={classes.SearchContainer}>
+            <SearchInput />
+          </div>
           <div className={classes.AvatarContainer}>
             <Popover
               trigger='click'

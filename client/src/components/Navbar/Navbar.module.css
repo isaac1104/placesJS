@@ -34,3 +34,23 @@
   background-color: #2d3436;
   border: none;
 }
+
+.SearchContainer {
+  position: absolute;
+  left: 4em;
+}
+
+@media screen and (max-width: 425px) {
+  .AvatarText {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .AvatarText {
+    display: none;
+  }
+  .AvatarContainer {
+    display: inline;
+  }
+}
